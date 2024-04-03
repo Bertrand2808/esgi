@@ -23,11 +23,6 @@ public class Famille {
   
   private String nom;
 
-  @Size(min = 6, max = 6)
+  @Size(min = 6, max = 6, message = "couleurRGB doit contenir 6 caractères")
   private String couleurRGB;
-
-  public void setCouleurRGB(String couleurRGB) {
-    if (couleurRGB.length() != 6) throw new IllegalArgumentException("couleurRGB doit contenir 6 caractères");
-    this.couleurRGB = couleurRGB;
-  }
 }

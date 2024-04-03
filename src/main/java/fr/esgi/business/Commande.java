@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Commande {
 
   private LocalDate dateHeureDEnvoi;
 
+  @NotEmpty(message = "Ligne commande ne doit pas être null ou vide")
   @OneToMany(mappedBy = "commande")
   private List<LigneCommande> lignesCommande;
 
@@ -35,16 +37,4 @@ public class Commande {
 
   @ManyToOne
     private Jardinier jardinier;
-
-  public Commande(LocalDate dateHeureDEnvoi, List<LigneCommande> lignesCommande) {
-    this.dateHeureDEnvoi = dateHeureDEnvoi;
-    this.lignesCommande = lignesCommande;
-  }
-
-  public void setLignesCommande(List<LigneCommande> lignesCommande) {
-    if (lignesCommande == null || lignesCommande.isEmpty()) {
-      throw new IllegalStateException("lignesCommande ne doit pas être null ou vide");
-    }
-    this.lignesCommande = lignesCommande;
-  }
 }
