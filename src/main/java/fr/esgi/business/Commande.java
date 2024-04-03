@@ -10,9 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Commande {
 
   @Id
@@ -33,31 +39,6 @@ public class Commande {
   public Commande(LocalDate dateHeureDEnvoi, List<LigneCommande> lignesCommande) {
     this.dateHeureDEnvoi = dateHeureDEnvoi;
     this.lignesCommande = lignesCommande;
-  }
-
-  public Commande() {
-
-  }
-
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public LocalDate getDateHeureDEnvoi() {
-    return dateHeureDEnvoi;
-  }
-
-  public void setDateHeureDEnvoi(LocalDate dateHeureDEnvoi) {
-    this.dateHeureDEnvoi = dateHeureDEnvoi;
-  }
-
-  public List<LigneCommande> getLignesCommande() {
-    return lignesCommande;
   }
 
   public void setLignesCommande(List<LigneCommande> lignesCommande) {

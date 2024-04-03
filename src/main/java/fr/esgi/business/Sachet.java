@@ -8,8 +8,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Sachet {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,28 +33,4 @@ public class Sachet {
 
   @ManyToOne
   private Fournisseur fournisseur;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Integer getPoidsEnGrammes() {
-    return poidsEnGrammes;
-  }
-
-  public void setPoidsEnGrammes(Integer poidsEnGrammes) {
-    this.poidsEnGrammes = poidsEnGrammes;
-  }
-
-  public Float getPrixEnEuros() {
-    return prixEnEuros;
-  }
-
-  public void setPrixEnEuros(Float prixEnEuros) {
-    this.prixEnEuros = prixEnEuros;
-  }
 }
