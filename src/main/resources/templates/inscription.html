@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+    <h2>Inscription</h2>
+    <form action="#" th:action="@{/inscription}" method="post">
+        <label for="email">Adresse email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="dateNaissance">Date de naissance:</label><br>
+        <input type="date" id="dateNaissance" name="dateNaissance" required><br>
+
+        <label for="motDePasse">Mot de passe:</label><br>
+        <input type="password" id="motDePasse" name="motDePasse" required><br><br>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+</body>
+</html>
