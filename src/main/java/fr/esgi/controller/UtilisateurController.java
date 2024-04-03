@@ -20,13 +20,20 @@ public class UtilisateurController {
     }
 
     @PostMapping("/inscription")
-    public String inscrireUtilisateur(Utilisateur utilisateur) {
+    public String inscrireUtilisateur(@RequestParam String email, @RequestParam String motDePasse) {
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setAdresseEmail(email);
+        utilisateur.setMotDePasse(motDePasse);
+        System.out.println("Adresse e-mail de l'utilisateur : " + utilisateur.getAdresseEmail());
         utilisateurService.inscrireUtilisateur(utilisateur);
         return "redirect:/connexion"; // Rediriger vers la page de connexion après l'inscription
     }
 
     @PostMapping("/connexion")
     public String connecterUtilisateur(@RequestParam String email, @RequestParam String motDePasse, Model model) {
+        System.out.println("Adresse e-mail de l'utilisateur : " + email);
+        System.out.println("Mot de passe de l'utilisateur : " + motDePasse);
+        System.out.println("mot de passe en base de l'utilisateur : " + utilisateurService.connecterUtilisateur(email, motDePasse).getMotDePasse());
         Utilisateur utilisateur = utilisateurService.connecterUtilisateur(email, motDePasse);
         if (utilisateur != null) {
             // Gérer la connexion réussie, par exemple en stockant l'utilisateur dans la session

@@ -15,24 +15,31 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers("/", "/inscription").permitAll()
+                .requestMatchers("/", "/inscription", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(formLogin -> formLogin
                         .loginPage("/connexion")
                         .loginProcessingUrl("/connexion")
-                        .defaultSuccessUrl("/accueil", true)
+                        .usernameParameter("adresseEmail")
+                        .passwordParameter("motDePasse")
+                        .defaultSuccessUrl("/catalogue", true)
                         .failureUrl("/connexion?erreur=true")
                         .permitAll())
                 .logout(logout -> logout
-                        .permitAll());
+                        .permitAll())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**"))
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions
+                                .sameOrigin()));
         return http.build();
     }
 

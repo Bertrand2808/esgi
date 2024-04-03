@@ -8,12 +8,12 @@ public class AppController {
 
     @GetMapping("/connexion")
     public String showLoginPage() {
-        return "connexion"; // Nom du fichier HTML de votre template Thymeleaf sans l'extension .html
+        return "connexion";
     }
 
     @GetMapping("/inscription")
     public String showRegisterPage() {
-        return "inscription"; // Nom du fichier HTML de votre template Thymeleaf sans l'extension .html
+        return "inscription";
     }
 }
 
