@@ -8,8 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class LigneCommande {
 
   @Id
@@ -25,21 +29,5 @@ public class LigneCommande {
 
   @ManyToMany
   private List<Sachet> sachets;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Integer getQuantite() {
-    return quantite;
-  }
-
-  public void setQuantite(Integer quantite) {
-    this.quantite = quantite;
-  }
 }
 

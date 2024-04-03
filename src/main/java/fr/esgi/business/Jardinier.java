@@ -9,8 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Jardinier {
   @Id
   private LocalDate dateDeNaissance;
@@ -27,17 +35,10 @@ public class Jardinier {
   @OneToMany(mappedBy = "jardinier")
   private List<Commande> commandes;
 
-  public Jardinier() {
-  }
-
   public Jardinier(LocalDate dateDeNaissance, String email, String motDePasse) {
     this.dateDeNaissance = dateDeNaissance;
     this.email = email;
     this.motDePasse = motDePasse;
-  }
-
-  public LocalDate getDateDeNaissance() {
-    return dateDeNaissance;
   }
 
   public void setDateDeNaissance(LocalDate dateDeNaissance) {
@@ -45,21 +46,5 @@ public class Jardinier {
       throw new IllegalArgumentException("La date de naissance doit être antérieure à la date actuelle");
     }
     this.dateDeNaissance = dateDeNaissance;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getMotDePasse() {
-    return motDePasse;
-  }
-
-  public void setMotDePasse(String motDePasse) {
-    this.motDePasse = motDePasse;
   }
 }
