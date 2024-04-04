@@ -10,6 +10,9 @@
     <form action="#" th:action="@{/catalogue}" method="get">
         <label for="famille">Filtrer par famille:</label><br>
         <select id="famille" name="famille">
+            <option value="Legumes-feuilles">Légumes feuilles</option>
+            <option value="Legumes-racines">Légumes racines</option>
+            <option value="Legumes-fruits">Légumes fruits</option>
             <!-- Ici, vous devrez ajouter les options pour chaque famille disponible -->
         </select><br><br>
         <button type="submit">Filtrer</button>

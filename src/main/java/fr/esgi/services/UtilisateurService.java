@@ -3,20 +3,18 @@ package fr.esgi.services;
 import fr.esgi.business.Utilisateur;
 import fr.esgi.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UtilisateurService {
-
-    private final UtilisateurRepository utilisateurRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+public class UtilisateurService implements UserDetailsService {
 
     @Autowired
-    public UtilisateurService(UtilisateurRepository utilisateurRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.utilisateurRepository = utilisateurRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private UtilisateurRepository utilisateurRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public Utilisateur inscrireUtilisateur(Utilisateur utilisateur) {
         String motDePasseCrypte = passwordEncoder.encode(utilisateur.getMotDePasse());
@@ -25,16 +23,14 @@ public class UtilisateurService {
         return utilisateurRepository.save(utilisateur);
     }
 
-    public Utilisateur connecterUtilisateur(String email, String motDePasse) {
-        Utilisateur utilisateur = utilisateurRepository.findByAdresseEmail(email);
-        if (utilisateur != null) {
-            System.out.println("Adresse e-mail de l'utilisateur : " + utilisateur.getAdresseEmail());
-            System.out.println("Mot de passe de l'utilisateur : " + utilisateur.getMotDePasse());
-            if (passwordEncoder.matches(motDePasse, utilisateur.getMotDePasse())) {
-                return utilisateur;
-            }
-        }
-        return null;
-    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Utilisateur utilisateur = utilisateurRepository.findByAdresseEmail(username);
 
+        if (utilisateur == null) {
+            throw new UsernameNotFoundException("Utilisateur non trouvé");
+        }
+
+        return utilisateur;
+    }
 }
