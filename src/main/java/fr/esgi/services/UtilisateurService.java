@@ -21,17 +21,20 @@ public class UtilisateurService {
     public Utilisateur inscrireUtilisateur(Utilisateur utilisateur) {
         String motDePasseCrypte = passwordEncoder.encode(utilisateur.getMotDePasse());
         utilisateur.setMotDePasse(motDePasseCrypte);
-
+        System.out.println("Mot de passe crypté de l'utilisateur : " + utilisateur.getMotDePasse());
         return utilisateurRepository.save(utilisateur);
     }
 
     public Utilisateur connecterUtilisateur(String email, String motDePasse) {
         Utilisateur utilisateur = utilisateurRepository.findByAdresseEmail(email);
-        System.out.println("Adresse e-mail de l'utilisateur : " + utilisateur.getAdresseEmail());
-        System.out.println("Mot de passe de l'utilisateur : " + utilisateur.getMotDePasse());
-        if (utilisateur != null && passwordEncoder.matches(motDePasse, utilisateur.getMotDePasse())) {
-            return utilisateur;
+        if (utilisateur != null) {
+            System.out.println("Adresse e-mail de l'utilisateur : " + utilisateur.getAdresseEmail());
+            System.out.println("Mot de passe de l'utilisateur : " + utilisateur.getMotDePasse());
+            if (passwordEncoder.matches(motDePasse, utilisateur.getMotDePasse())) {
+                return utilisateur;
+            }
         }
         return null;
     }
+
 }
