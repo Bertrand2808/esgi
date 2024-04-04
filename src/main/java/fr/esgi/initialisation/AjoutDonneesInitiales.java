@@ -46,7 +46,14 @@ public class AjoutDonneesInitiales implements CommandLineRunner {
 
   private void ajouterUtilisateurs()
   {
-    utilisateurRepository.save(new Utilisateur(0L, "jean", "jaurès", "jean@wanadoo.fr", new BCryptPasswordEncoder().encode("password"), new ArrayList<LigneCommande>()));
+    Utilisateur user = new Utilisateur(0L, "jean", "jaurès", "jean@wanadoo.fr", new BCryptPasswordEncoder().encode("password"), new ArrayList<LigneCommande>(), "WRITE");
+    Utilisateur user2 = new Utilisateur(0L, "jean", "jaurès", "jean@wanadoo.fr", new BCryptPasswordEncoder().encode("password"), new ArrayList<LigneCommande>(), "JARDINIER");
+    Utilisateur user3 = new Utilisateur(0L, "jean", "jaurès", "jean@wanadoo.fr", new BCryptPasswordEncoder().encode("password"), new ArrayList<LigneCommande>(), "");
+
+    utilisateurRepository.save(user);
+    utilisateurRepository.save(user2);
+    utilisateurRepository.save(user3);
+
     jardinierRepository.save(new Jardinier());
     fournisseurRepository.save(new Fournisseur());
   }

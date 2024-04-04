@@ -3,6 +3,7 @@ package fr.esgi.business;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -34,10 +36,15 @@ public class Utilisateur implements UserDetails
   @OneToMany(mappedBy = "utilisateur")
   private List<LigneCommande> lignesCommande;
 
+  private String role;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities()
   {
     List<GrantedAuthority> list = new ArrayList<>();
+
+    if (!Objects.equals(role, "")) { list.add(new SimpleGrantedAuthority(role)); }
+
     return list;
   }
 

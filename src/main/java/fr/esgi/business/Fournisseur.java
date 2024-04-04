@@ -21,7 +21,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Fournisseur extends Utilisateur
+public class Fournisseur
 {
   @Id
   @Pattern(regexp = "^(06|07)([0-9]*)$", message = "Le numéro de portable doit commencer par 06 ou 07")
@@ -29,11 +29,4 @@ public class Fournisseur extends Utilisateur
 
   @OneToMany(mappedBy = "fournisseur")
   private List<Sachet> sachets;
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    List<GrantedAuthority> list = new ArrayList<>();
-    list.add(new SimpleGrantedAuthority("WRITE"));
-    return list;
-  }
 }
