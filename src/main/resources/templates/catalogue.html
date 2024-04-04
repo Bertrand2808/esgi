@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Catalogue</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"}>
 </head>
 <body>
-    <h2>Catalogue</h2>
+<h2>Catalogues </h2>
 
-    <form action="#" th:action="@{/catalogue}" method="get">
-        <label for="famille">Filtrer par famille:</label><br>
-        <select id="famille" name="famille">
-            <option value="Legumes-feuilles">Légumes feuilles</option>
-            <option value="Legumes-racines">Légumes racines</option>
-            <option value="Legumes-fruits">Légumes fruits</option>
-            <!-- Ici, vous devrez ajouter les options pour chaque famille disponible -->
-        </select><br><br>
-        <button type="submit">Filtrer</button>
-    </form>
+<form action="#" th:action="@{/catalogue}" method="get">
+    <label for="famille">Filtrer par famille:</label><br>
+    <select id="famille" name="famille">
+        <option value="Legumes-feuilles">Légumes feuilles</option>
+        <option value="Legumes-racines">Légumes racines</option>
+        <option value="Legumes-fruits">Légumes fruits</option>
+        <!-- Ici, vous devrez ajouter les options pour chaque famille disponible -->
+    </select><br><br>
+    <button type="submit">Filtrer</button>
+</form>
 
-    <h3>Types de graines:</h3>
-    <ul>
-        <li th:each="graine : ${graines}">
-            <p th:text="${graine.nom}"></p>
-            <p th:text="${graine.description}"></p>
-            <!-- Ajoutez ici d'autres informations sur la graine si nécessaire -->
-        </li>
-    </ul>
+<h3>Types de graines:</h3>
+<ul>
+    <li th:each="graine : ${graines}">
+        <p th:text="${graine.nom}"></p>
+        <p th:text="${graine.description}"></p>
+        <!-- Ajoutez ici d'autres informations sur la graine si nécessaire -->
+    </li>
+</ul>
 </body>
 </html>
