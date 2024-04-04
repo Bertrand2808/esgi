@@ -1,22 +1,21 @@
 package fr.esgi.business;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Recette {
+public class Recette
+{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -25,4 +24,10 @@ public class Recette {
   private String contenu;
   @ManyToOne
   private Commande commande;
+
+  @OneToMany
+  private ArrayList<TypeDeGraine> graines;
+
+  @ManyToOne
+  private Jardinier jardinier;
 }
