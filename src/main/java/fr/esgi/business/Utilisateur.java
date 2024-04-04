@@ -17,8 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Utilisateur implements UserDetails {
-
+public class Utilisateur implements UserDetails
+{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -35,7 +35,8 @@ public class Utilisateur implements UserDetails {
   private List<LigneCommande> lignesCommande;
 
   @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
+  public Collection<? extends GrantedAuthority> getAuthorities()
+  {
     List<GrantedAuthority> list = new ArrayList<>();
     return list;
   }

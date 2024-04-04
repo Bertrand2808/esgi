@@ -27,6 +27,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorize -> authorize
                     .requestMatchers("/", "/inscription", "/error", "/h2-console/**").permitAll()
+                    .requestMatchers("/create/*").hasAuthority("WRITE")
                     .anyRequest().authenticated()
                 )
                 .logout(LogoutConfigurer::permitAll)

@@ -1,13 +1,14 @@
 package fr.esgi.initialisation;
 
-import fr.esgi.business.Famille;
-import fr.esgi.business.TypeDeGraine;
-import fr.esgi.repository.FamilleRepository;
-import fr.esgi.repository.TypeDeGraineRepository;
+import fr.esgi.business.*;
+import fr.esgi.repository.*;
 import lombok.AllArgsConstructor;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 @Component
 @AllArgsConstructor
@@ -15,14 +16,19 @@ public class AjoutDonneesInitiales implements CommandLineRunner {
 
   private final TypeDeGraineRepository typeDeGraineRepository;
   private final FamilleRepository familleRepository;
-
+  private final UtilisateurRepository utilisateurRepository;
+  private final JardinierRepository jardinierRepository;
+  private final FournisseurRepository fournisseurRepository;
 
   @Override
-  public void run(String... args) throws Exception {
+  public void run(String... args) throws Exception
+  {
     ajouterTypeDeGraine();
+    ajouterUtilisateurs();
   }
 
-  private void ajouterTypeDeGraine() {
+  private void ajouterTypeDeGraine()
+  {
     Famille famille1 = familleRepository.save(new Famille(1L, "Legumes-feuilles", "5F3384"));
     Famille famille2 = familleRepository.save(new Famille(2L, "Legumes-racines", "237D57"));
     Famille famille3 = familleRepository.save(new Famille(3L, "Legumes-fruits", "ABC123"));
@@ -35,5 +41,13 @@ public class AjoutDonneesInitiales implements CommandLineRunner {
     typeDeGraineRepository.save(new TypeDeGraine(5L, "Radis", "description Radis...", 14, 16, 45.0f, 2.5f, "conseils Radis...", famille2));
 
     typeDeGraineRepository.save(new TypeDeGraine(6L, "Tomate", "description Tomate...", 20, 25, 150.0f, 100.0f, "conseils Tomate...", famille3));
-    typeDeGraineRepository.save(new TypeDeGraine(7L, "Poivron", "description Poivron...", 20, 25, 120.0f, 80.0f, "conseils Poivron...", famille3));  }
+    typeDeGraineRepository.save(new TypeDeGraine(7L, "Poivron", "description Poivron...", 20, 25, 120.0f, 80.0f, "conseils Poivron...", famille3));
+  }
+
+  private void ajouterUtilisateurs()
+  {
+    utilisateurRepository.save(new Utilisateur(0L, "jean", "jaurès", "jean@wanadoo.fr", new BCryptPasswordEncoder().encode("password"), new ArrayList<LigneCommande>()));
+    jardinierRepository.save(new Jardinier());
+    fournisseurRepository.save(new Fournisseur());
+  }
 }
