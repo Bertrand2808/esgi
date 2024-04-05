@@ -19,6 +19,7 @@ public class TypeDeGraine {
   private Long id;
   private String nom;
 
+  @Column(columnDefinition = "TEXT")
   private String description;
 
   @Range(min = 1,max = 52)
@@ -27,6 +28,7 @@ public class TypeDeGraine {
   private Integer semaineDePlantationMax;
   private Float espacementEntrePiedsEnCentimetres;
   private Float espacementEntreLignesEnCentimetres;
+  @Column(columnDefinition = "TEXT")
   private String conseils;
 
   @NotNull(message = "famille ne doit pas être null")

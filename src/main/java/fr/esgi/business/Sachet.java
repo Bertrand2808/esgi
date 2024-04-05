@@ -2,12 +2,8 @@ package fr.esgi.business;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,15 +18,24 @@ public class Sachet {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
+
   private Integer poidsEnGrammes;
   private Float prixEnEuros;
+
+  @NotNull(message = "TypeDeGraine ne doit pas être null")
+  @OneToOne
+  private TypeDeGraine typeDeGraine;
 
   @ManyToMany(mappedBy = "sachets")
   private List<LigneCommande> lignesCommande;
 
   @ManyToOne
-  private TypeDeGraine typeDeGraine;
-
-  @ManyToOne
   private Fournisseur fournisseur;
+
+  public Sachet(Integer poidsEnGrammes, Float prixEnEuros, TypeDeGraine typeDeGraine) {
+    this.poidsEnGrammes = poidsEnGrammes;
+    this.prixEnEuros = prixEnEuros;
+    this.typeDeGraine = typeDeGraine;
+  }
 }
+

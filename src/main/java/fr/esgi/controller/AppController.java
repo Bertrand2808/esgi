@@ -7,13 +7,18 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class AppController {
     @GetMapping("/inscription")
-    public String showRegisterPage() {
+    public String showRegisterPageInscription() {
         return "inscription";
     }
 
     @GetMapping("/")
     public RedirectView rootRedirectToCatalogue(){
         return new RedirectView("/catalogue");
+    }
+
+    @GetMapping("/commande-page")
+    public RedirectView showRedirectToCommande(){
+        return new RedirectView("/commande");
     }
 }
 

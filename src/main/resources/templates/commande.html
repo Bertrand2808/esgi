@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Commande</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commande.css}"}>
+</head>
+<body>
+<h2>Commande</h2>
+
+<h3>Types de graines disponibles:</h3>
+<ul>
+    <li th:each="sachet : ${sachets}">
+        <span class="sachet-nom" th:text="${sachet.typeDeGraine.nom}"></span>
+        <span class="sachet-details" th:text="'(' + ${sachet.poidsEnGrammes} + 'g - €' + ${sachet.prixEnEuros}+ ')'"></span>
+        <p class="sachet-conseils" th:text="${sachet.typeDeGraine.conseils}"></p>
+        <!-- Ajoutez ici d'autres informations sur le sachet si nécessaire -->
+        <form action="#" method="post">
+            <input type="hidden" name="sachetId" th:value="${sachet.id}">
+            <input type="number" name="quantite" value="1" min="1">
+            <button type="submit">Ajouter au panier</button>
+        </form>
+    </li>
+</ul>
+
+</body>
+</html>
